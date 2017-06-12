@@ -1,0 +1,45 @@
+3
+frontdoor 5 10
+myroom 0 5
+garage 10 5
+##end
+backyard 5 0
+livingroom 10 1
+kitchen 16 29
+familyroom 18 27
+hallway 10 92
+office 10 92
+bathroom 28 91
+pool 123 821
+fridge 12 104
+frontyard 35 80
+91st 45 70
+90th 200 19
+cactus 250 100
+loop101 300 150
+##start
+thunderbird 100 20
+
+
+
+frontdoor-familyroom
+frontdoor-kitchen
+frontdoor-livingroom
+livingroom-familyroom
+livingroom-kitchen
+familyroom-kitchen
+livingroom-hallway
+hallway-office
+hallway-bathroom
+hallway-myroom
+hallway-garage
+backyard-kitchen
+backyard-livingroom
+backyard-pool
+kitchen-fridge
+frontyard-frontdoor
+frontyard-91st
+91st-90th
+90th-cactus
+cactus-loop101
+90th-thunderbird
