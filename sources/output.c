@@ -14,10 +14,8 @@
 
 void		print_moves(t_lem_in *prog, t_ant *ant)
 {
-	char	*curr_room;
 	char	*next_room;
 
-	curr_room = prog->rooms[ant->location];
 	next_room = prog->rooms[ant->move_to];
 	printf("L%d-%s ", ant->id + 1, next_room);
 }

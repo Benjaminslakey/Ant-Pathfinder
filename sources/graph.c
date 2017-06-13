@@ -66,7 +66,6 @@ t_adjlist		*create_adjlist(int v_ind, int ne, int **e)
 
 t_vert			*new_vertex(int nv, char *n, int ne, int **e)
 {
-	t_adj 				*temp;
 	t_vert				*vert;
 
 	MEM_GUARD((vert = (t_vert*)malloc(sizeof(t_vert))));
@@ -76,7 +75,6 @@ t_vert			*new_vertex(int nv, char *n, int ne, int **e)
 	vert->dval = INFINITY;
 	vert->prev = -1;
 	vert->visited = false;
-	temp = (vert->lst)->first;
 	return (vert);
 }
 

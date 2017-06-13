@@ -16,13 +16,9 @@ void 			print_antfarm(t_lem_in *o)
 {
     //int         t = 0;
     int 		i;
-    t_graph 	*graph;
-    t_vert 		**vertices;
 
     i = -1;
-    graph = o->ant_farm;
     //printf(RED"af_trace%d\n", t++);
-    vertices = graph->vertices;
     //printf(RED"af_trace%d\n", t++);
     printf("%d\n", o->n_ants);
     //printf(RED"af_trace%d\n", t++);
@@ -65,13 +61,11 @@ t_lem_in		*init_lem_in(char **file)
 
 int				main(void)
 {
-    int         t = 0;
+    //int         t = 0;
     t_lem_in	*program;
-    t_vert		**ant_farm;
     char		**file;
 
     program = NULL;
-    ant_farm = NULL;
     ERR_GUARD(((file = fgetc_stdin()) == NULL), EXIT_FAILURE);
     //Rrintf(RED"maintrace%d\n", t++);
     ERR_GUARD((print_error((errchk_input(file)))) == 1, EXIT_FAILURE);

@@ -42,7 +42,6 @@ t_path					*dijkstras(t_graph *graph, int src, int target)
 {
 	t_heap				*q;
 	t_vert				*u;
-    t_vert              *prev;
 	t_path				*path;
 
 	q = init_min_queue(graph, src);
@@ -51,7 +50,6 @@ t_path					*dijkstras(t_graph *graph, int src, int target)
 	{
 		u = extract_min(q);
 		relax_edges(graph, q, u);
-        prev = u;
 	}
 	destroy_heap(&q);
 	path = build_path(graph, src, target);
