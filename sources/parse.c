@@ -19,32 +19,16 @@
 * strings each string being one line from the file
 */
 
-char			**fgetc_stdin(void)
-{
-	char		*file_buffer;
-	char		*temp;
-	char		*line;
-
-	MEM_GUARD((file_buffer = ft_strnew(0)));
-	while (get_next_line(STDIN_FILENO, &line) > 0)
-	{
-		MEM_GUARD((temp = ft_strjoin(file_buffer, line)));
-		free((void*)line);
-		free((void*)file_buffer);
-		MEM_GUARD((file_buffer = ft_strjoin(temp, "\n")));
-		free((void*)temp);
-	}
-	return (ft_strsplit(file_buffer, '\n'));
-}
-
 int 			parse_rooms(char **file, t_lem_in *prog)
 {
 	int 		i;
 	int 		j;
+    int         c;
 	char 		**temp;
 
 	i = -1;
 	j = -1;
+    c = 0;
 	temp = NULL;
 	while (file[++i])
 	{
@@ -53,9 +37,10 @@ int 			parse_rooms(char **file, t_lem_in *prog)
 			temp = ft_strsplit(file[i], ' ');
 			prog->rooms[++j] = ft_strdup(temp[0]);
             free_strings(&temp);
+            c++;
 		}
 	}
-    return (SUCCESS);
+    return (c > 0 ? SUCCESS : ERR);
 }
 
 int 			parse_links(char **file, t_lem_in *o)
@@ -86,7 +71,7 @@ int 			parse_links(char **file, t_lem_in *o)
             free_strings(&temp);
 		}
 	}
-    return (SUCCESS);
+    return (c > -1 ? SUCCESS : ERR);
 }
 
 int 			parse_commands(char **file, t_lem_in *prog)

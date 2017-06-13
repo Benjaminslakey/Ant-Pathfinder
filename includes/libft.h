@@ -19,8 +19,8 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <fcntl.h>
 # include <stdbool.h>
+# include <fcntl.h>
 
 # define WHT(x) (x == ' ' || x == '\t' || x == '\r' || x == '\v' || XWHT(x))
 # define XWHT(x) (x == '\f' || x == '\n' )
@@ -38,7 +38,6 @@
 
 # define RED "\x1b[31m"
 # define YELLOW "\x1b[33m"
-# define BLUE "\x1b[34m"
 # define GREEN "\x1b[32m"
 # define CRESET "\x1b[0m"
 
@@ -66,7 +65,9 @@ void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
+void                free_strings(char ***strings);
 size_t				ft_strlen(const char *s);
+char                *ft_str_replace(char **to_replace, char *replace_with);
 char				*ft_strdup(const char *s1);
 char				*ft_strndup(const char *s1, size_t size);
 char				*ft_strcpy(char *dst, const char *src);
@@ -74,6 +75,7 @@ char				*ft_strncpy(char *dst, const char *src, size_t len);
 char				*ft_strcat(char *s1, const char *s2);
 char				*ft_strncat(char *s1, const char *s2, size_t n);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
+int                 chr_count(char *s, char c);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *big, const char *little);
@@ -141,7 +143,7 @@ void				copy_int_array(int **dest, int *src, int arr_size);
 void				integer_quicksort(int *int_table, int left, int right);
 void				swap_integers(int *a, int *b);
 int					ft_str_isnum(char *str);
-void                free_strings(char ***strings);
+void				delete_strings(char ***strings, int num);
 int 				get_next_line(const int fd, char **line);
 
 #endif

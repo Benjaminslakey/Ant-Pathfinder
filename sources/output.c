@@ -33,9 +33,9 @@ int 		print_error(int err)
 	if (err == 4)
 		ft_putstr_fd("Err: \n", STDOUT_FILENO);
 	if (err == 5)
-		ft_putstr_fd("Err: empty line in file\n", STDOUT_FILENO);
+		ft_putstr_fd("Err: Invalid Line\n", STDOUT_FILENO);
 	if (err == 6)
-		ft_putstr_fd("Err: empty line in file\n", STDOUT_FILENO);
+		ft_putstr_fd("Err: Invalid room name\n", STDOUT_FILENO);
 	if (err == 7)
 		ft_putstr_fd("Err: empty line in file\n", STDOUT_FILENO);
 	if (err == 8)

@@ -41,22 +41,24 @@ int 		chk_linkformat(char *link)
 
 int 		chk_roomformat(char *room)
 {
+
     int 	i;
     int     errnum;
     char 	**s;
 
+    s = NULL;
     errnum = SUCCESS;
     i = -1;
     s = ft_strsplit(room, ' ');
     while (s[++i])
         ;
     ERR_GUARD((i != 3), -1);
-    if (!ft_strcspn(s[1], "-0123456789") || !ft_strcspn(s[2], "-0123456789"))
+    if (chr_count(s[0], '-') > 0)
         errnum = ERR;
-    if (!ft_strcmp(s[0], "L") || !ft_strcmp(s[0], "#")) {
+    else if (!ft_strcspn(s[1], "-0123456789") || !ft_strcspn(s[2], "-0123456789"))
         errnum = ERR;
-        //printf(RED"room name error\n"CRESET);
-    }
+    else if (!ft_strcmp(s[0], "L") || !ft_strcmp(s[0], "#"))
+        errnum = ERR;
     free_strings(&s);
     return (errnum);
 }
@@ -69,7 +71,7 @@ int			errchk_input(char **file)
     int     end;
 
     i = -1;
-    err = -1;
+    err = SUCCESS;
     start = 0;
     end = 0;
     while (file[++i])
@@ -78,11 +80,13 @@ int			errchk_input(char **file)
             start = 1;
         else if (!ft_strcmp(file[i], "##end") && !chk_roomformat(file[i + 1]))
             end = 1;
+        else if (!ft_strcmp(file[i], "L"))
+            return (6);
         else if (!ft_strcmp(file[i], ""))
-            return (ERR);
+            return (2);
         else if (chk_roomformat(file[i]) < 0 && chk_linkformat(file[i]) < 0
                 && chk_comm(file[i]) < 0)
-            return (1);
+            return (5);
     }
     ERR_GUARD((start == 0 || end == 0), 12);
     return (err);

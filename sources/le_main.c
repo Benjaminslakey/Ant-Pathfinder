@@ -12,16 +12,33 @@
 
 #include "../includes/lem_in.h"
 
+char			**fgetc_stdin(void)
+{
+    char        **file;
+	char		*file_buffer;
+    char		*temp;
+    char		*line;
+
+    MEM_GUARD((file_buffer = ft_strnew(0)));
+    while (get_next_line(STDIN_FILENO, &line) > 0)
+    {
+        MEM_GUARD((temp = ft_strjoin(file_buffer, line)));
+        free((void*)line);
+        free((void*)file_buffer);
+        MEM_GUARD((file_buffer = ft_strjoin(temp, "\n")));
+        free((void*)temp);
+	}
+    file = ft_strsplit(file_buffer, '\n');
+    free(file_buffer);
+	return (file);
+}
+
 void 			print_antfarm(t_lem_in *o)
 {
-    //int         t = 0;
     int 		i;
 
     i = -1;
-    //printf(RED"af_trace%d\n", t++);
-    //printf(RED"af_trace%d\n", t++);
     printf("%d\n", o->n_ants);
-    //printf(RED"af_trace%d\n", t++);
     while ((o->rooms)[++i])
     {
         if (i == o->source)
@@ -30,11 +47,9 @@ void 			print_antfarm(t_lem_in *o)
             printf("##end\n");
         printf("%s\n", o->rooms[i]);
     }
-    //printf(RED"af_trace%d\n", t++);
     i = -1;
     while (++i < o->nlinks)
         printf("%s-%s\n", o->rooms[o->links[i][0]], o->rooms[o->links[i][1]]);
-    //printf(RED"af_trace%d\n", t++);
     printf("\n");
 }
 
@@ -61,28 +76,21 @@ t_lem_in		*init_lem_in(char **file)
 
 int				main(void)
 {
-    //int         t = 0;
     t_lem_in	*program;
     char		**file;
 
     program = NULL;
     ERR_GUARD(((file = fgetc_stdin()) == NULL), EXIT_FAILURE);
-    //Rrintf(RED"maintrace%d\n", t++);
     ERR_GUARD((print_error((errchk_input(file)))) == 1, EXIT_FAILURE);
-    //printf(RED"maintrace%d\n", t++);
     if ((program = init_lem_in(file)) == NULL)
     {
-        printf(RED"ERROR"CRESET);
+        printf(RED"ERROR\n"CRESET);
         clear_memory(&file, NULL);
         return (EXIT_FAILURE);
     }
-    //printf(RED"maintrace%d\n", t++);
     print_antfarm(program);
-    //printf(RED"maintrace%d\n", t++);
     init_ants(program);
-    //printf(RED"maintrace%d\n", t++);
     route_ants(program);
-    //printf(RED"maintrace%d\n", t++);
     printf(GREEN"-------------------------------------------------\n\n"CRESET);
     clear_memory(&file, &program);
     return (EXIT_SUCCESS);
