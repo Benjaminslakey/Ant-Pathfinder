@@ -55,7 +55,7 @@ int 		chk_roomformat(char *room)
         errnum = ERR;
     if (!ft_strcmp(s[0], "L") || !ft_strcmp(s[0], "#")) {
         errnum = ERR;
-        printf(RED"room name error\n"CRESET);
+        //printf(RED"room name error\n"CRESET);
     }
     free_strings(&s);
     return (errnum);
