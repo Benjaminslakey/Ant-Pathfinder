@@ -12,9 +12,9 @@
 
 #include "../includes/lem_in.h"
 
-t_ant 				*create_ant(int id, int start)
+t_ant				*create_ant(int id, int start)
 {
-	t_ant 			*ant;
+	t_ant			*ant;
 
 	ant = (t_ant*)malloc(sizeof(t_ant));
 	ant->id = id;
@@ -23,10 +23,10 @@ t_ant 				*create_ant(int id, int start)
 	return (ant);
 }
 
-void 				init_ants(t_lem_in *prog)
+void				init_ants(t_lem_in *prog)
 {
-	int 			i;
-	t_ant 			**ants;
+	int				i;
+	t_ant			**ants;
 
 	i = -1;
 	ants = (t_ant**)malloc(sizeof(t_ant*) * prog->n_ants);
@@ -35,15 +35,15 @@ void 				init_ants(t_lem_in *prog)
 	prog->ants = ants;
 }
 
-void                free_ants(t_ant ***ants, int num_ants)
+void				free_ants(t_ant ***ants, int num_ants)
 {
-    int             i;
+	int				i;
 
-    i = -1;
-    MEM_GUARD_VR(ants);
-    MEM_GUARD_VR(*ants);
-    while (++i < num_ants)
-        free(((*ants)[i]));
-    free((*ants));
-    ants = NULL;
+	i = -1;
+	MEM_GUARD_VR(ants);
+	MEM_GUARD_VR(*ants);
+	while (++i < num_ants)
+		free(((*ants)[i]));
+	free((*ants));
+	ants = NULL;
 }

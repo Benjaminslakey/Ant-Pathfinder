@@ -14,7 +14,7 @@
 
 t_adj			*new_adj(int vert_index, int adjacent_vert, int cost)
 {
-	t_adj				*adj;
+	t_adj		*adj;
 
 	MEM_GUARD((adj = (t_adj*)malloc(sizeof(t_adj))));
 	adj->vertex = vert_index;
@@ -24,9 +24,9 @@ t_adj			*new_adj(int vert_index, int adjacent_vert, int cost)
 	return (adj);
 }
 
-int 				adjlst_add(t_adjlist *head, t_adj *new)
+int				adjlst_add(t_adjlist *head, t_adj *new)
 {
-	t_adj 				*temp;
+	t_adj			*temp;
 
 	temp = NULL;
 	ERR_GUARD((head == NULL), ERR);
@@ -44,10 +44,10 @@ int 				adjlst_add(t_adjlist *head, t_adj *new)
 
 t_adjlist		*create_adjlist(int v_ind, int ne, int **e)
 {
-	t_adjlist			*head;
-	t_adj 				*temp;
-	int					c;
-	int 				v;
+	t_adjlist	*head;
+	t_adj		*temp;
+	int			c;
+	int			v;
 
 	c = -1;
 	v = 0;
@@ -66,11 +66,11 @@ t_adjlist		*create_adjlist(int v_ind, int ne, int **e)
 
 t_vert			*new_vertex(int nv, char *n, int ne, int **e)
 {
-	t_vert				*vert;
+	t_vert		*vert;
 
 	MEM_GUARD((vert = (t_vert*)malloc(sizeof(t_vert))));
 	vert->v_ind = nv;
-	vert->vname  = ft_strdup(n);
+	vert->vname = ft_strdup(n);
 	vert->lst = create_adjlist(nv, ne, e);
 	vert->dval = INFINITY;
 	vert->prev = -1;
@@ -78,11 +78,11 @@ t_vert			*new_vertex(int nv, char *n, int ne, int **e)
 	return (vert);
 }
 
-t_graph					*create_graph(int nv, char **vlist, int ne, int **e)
+t_graph			*create_graph(int nv, char **vlist, int ne, int **e)
 {
-	int 				v;
-	t_vert				**vertices;
-	t_graph 			*graph;
+	int			v;
+	t_vert		**vertices;
+	t_graph		*graph;
 
 	v = -1;
 	MEM_GUARD((graph = (t_graph*)malloc(sizeof(t_graph))));

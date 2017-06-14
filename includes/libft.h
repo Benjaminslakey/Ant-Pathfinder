@@ -138,13 +138,14 @@ int					ft_nbrlen(intmax_t nbr, int base);
 char				*ft_append_str(char *orig, const char *to_append);
 char				*ft_prepend_str(char *orig, const char *to_prepend);
 int					**new_int_table(int height, int width);
+int					str_inhaystack(char *needle, char **haystack);
 void				delete_int_table(int height, int ***table);
 int					*clone_int_array(int *arr, int arr_size);
 void				copy_int_array(int **dest, int *src, int arr_size);
 void				integer_quicksort(int *int_table, int left, int right);
 void				swap_integers(int *a, int *b);
 int					ft_str_isnum(char *str);
-void                array_reverse_int(int *arr, int size);
-int 				get_next_line(const int fd, char **line);
+void				array_reverse_int(int *arr, int size);
+int					get_next_line(const int fd, char **line);
 
 #endif

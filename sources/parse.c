@@ -78,31 +78,23 @@ int 			parse_links(char **file, t_lem_in *o)
 int 			parse_commands(char **file, t_lem_in *prog)
 {
 	int 		i;
-	int 		j;
 	char 		**temp;
 
-
-    i = -1;
+	i = -1;
 	temp = NULL;
 	while (file[++i])
 	{
-		if (!chk_comm(file[i]))
-			j = 0;
 			if (!ft_strcmp(file[i], "##start"))
 			{
 				temp = ft_strsplit(file[i + 1], ' ');
-				while ((prog->rooms)[j] && ft_strcmp((prog->rooms)[j], temp[0]))
-					j++;
-				prog->source = j;
-				prog->start = (prog->rooms)[j];
+				prog->source = str_inhaystack(temp[0], prog->rooms);
+				prog->start = (prog->rooms)[prog->source];
 			}
 			else if (!ft_strcmp(file[i], "##end"))
 			{
 				temp = ft_strsplit(file[i + 1], ' ');
-				while ((prog->rooms)[j] && ft_strcmp((prog->rooms)[j], temp[0]))
-					j++;
-				prog->dest = j;
-				prog->end = (prog->rooms)[j];
+				prog->dest = str_inhaystack(temp[0], prog->rooms);
+				prog->end = (prog->rooms)[prog->dest];
 			}
 		}
     return (SUCCESS);
@@ -144,7 +136,6 @@ int 			parse_file(char **file, t_lem_in *prog)
 	while (file[++i])
 		count += (!chk_linkformat(file[i])) ? 1 : 0;
 	prog->nlinks = count;
-    ERR_GUARD((prog->links = (int**)malloc(sizeof(int*) * count)) == NULL, ERR);
 	ERR_GUARD((prog->links = (int**)malloc(sizeof(int*) * count)) == NULL, ERR);
 	ERR_GUARD(parse_rooms(file, prog) == ERR, ERR);
 	ERR_GUARD(parse_links(file, prog) == ERR, ERR);

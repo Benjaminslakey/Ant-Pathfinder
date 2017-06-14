@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heap_functions.c  	                                :+:      :+:    :+:   */
+/*   heap_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bslakey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,10 @@
 
 #include "../includes/lem_in.h"
 
-t_heap  				*init_min_queue(t_graph *graph, int src)
+t_heap			*init_min_queue(t_graph *graph, int src)
 {
-	int 				i;
-	t_heap 				*min_queue;
+	int			i;
+	t_heap		*min_queue;
 
 	i = -1;
 	min_queue = build_heap(graph->n_vertices * 2);
@@ -25,27 +25,27 @@ t_heap  				*init_min_queue(t_graph *graph, int src)
 			insert_w_priority(min_queue, (graph->vertices)[i], 0);
 		else
 			insert_w_priority(min_queue, (graph->vertices)[i], INFINITY);
-    }
+	}
 	return (min_queue);
 }
 
-void 			insert_w_priority(t_heap *heap, t_vert *v, int priority)
+void			insert_w_priority(t_heap *heap, t_vert *v, int priority)
 {
-	t_vert 		**h;
-	int 		n;
+	t_vert		**h;
+	int			n;
 
 	v->dval = priority;
-    v->visited = false;
-    v->prev = -1;
+	v->visited = false;
+	v->prev = -1;
 	n = ++(heap->size);
 	h = heap->arr;
 	h[n] = v;
 	heapify_up(heap, n);
 }
 
-void 			decrease_key(t_heap *heap, t_vert *v, int new_key)
+void			decrease_key(t_heap *heap, t_vert *v, int new_key)
 {
-	int 		n;
+	int			n;
 
 	n = 0;
 	if (new_key > v->dval)
@@ -58,10 +58,10 @@ void 			decrease_key(t_heap *heap, t_vert *v, int new_key)
 	heapify_up(heap, n);
 }
 
-t_vert 			*extract_min(t_heap *heap)
+t_vert			*extract_min(t_heap *heap)
 {
-	t_vert 		**h;
-	t_vert 		*v;
+	t_vert		**h;
+	t_vert		*v;
 
 	v = NULL;
 	h = heap->arr;
@@ -70,7 +70,7 @@ t_vert 			*extract_min(t_heap *heap)
 	v = h[ROOT];
 	h[ROOT] = h[(heap->size)--];
 	h[heap->size + 1] = NULL;
-    if (heap->size != 0)
-	    heapify_down(heap, ROOT);
+	if (heap->size != 0)
+		heapify_down(heap, ROOT);
 	return (v);
 }

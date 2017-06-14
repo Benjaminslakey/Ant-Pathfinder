@@ -13,7 +13,6 @@
 #include "../includes/lem_in.h"
 #include <stdio.h>
 
-/*  */
 void 					print_heap(t_heap *heap)
 {
 	t_vert 				*temp;

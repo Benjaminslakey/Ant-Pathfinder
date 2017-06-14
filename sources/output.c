@@ -17,41 +17,41 @@ void		print_moves(t_lem_in *prog, t_ant *ant)
 	char	*next_room;
 
 	next_room = prog->rooms[ant->move_to];
-    ft_putstr(GREEN"L");
-    ft_putnbr(ant->id + 1);
-    ft_putstr("-");
-    ft_putstr(next_room);
-    ft_putstr(" "CRESET);
+	ft_putstr(GREEN"L");
+	ft_putnbr(ant->id + 1);
+	ft_putstr("-");
+	ft_putstr(next_room);
+	ft_putstr(" "CRESET);
 }
 
-void 			print_antfarm(t_lem_in *o)
+void		print_antfarm(t_lem_in *o)
 {
-    int 		i;
+	int		i;
 
-    i = -1;
-    ft_putnbr(o->n_ants);
-    ft_putstr("\n");
-    while ((o->rooms)[++i])
-    {
-        if (i == o->source)
-            ft_putstr("##start\n");
-        else if (i == o->dest)
-            ft_putstr("##end\n");
-        ft_putstr(o->rooms[i]);
-        ft_putstr("\n");
-    }
-    i = -1;
-    while (++i < o->nlinks)
-    {
-        ft_putstr(o->rooms[o->links[i][0]]);
-        ft_putstr("-");
-        ft_putstr(o->rooms[o->links[i][1]]);
-        ft_putstr("\n");
-    }
-    ft_putstr("\n");
+	i = -1;
+	ft_putnbr(o->n_ants);
+	ft_putstr("\n");
+	while ((o->rooms)[++i])
+	{
+		if (i == o->source)
+			ft_putstr("##start\n");
+		else if (i == o->dest)
+			ft_putstr("##end\n");
+		ft_putstr(o->rooms[i]);
+		ft_putstr("\n");
+	}
+	i = -1;
+	while (++i < o->nlinks)
+	{
+		ft_putstr(o->rooms[o->links[i][0]]);
+		ft_putstr("-");
+		ft_putstr(o->rooms[o->links[i][1]]);
+		ft_putstr("\n");
+	}
+	ft_putstr("\n");
 }
 
-int 		print_error(int err)
+int			print_error(int err)
 {
 	if (err > 0)
 		ft_putstr("ERROR\n");
@@ -77,5 +77,5 @@ int 		print_error(int err)
 		ft_putstr_fd("Err: No solutions exist\n", STDOUT_FILENO);
 	if (err == 13)
 		ft_putstr_fd("", STDOUT_FILENO);
-    return (err > 0 ? 1 : 0);
+	return (err > 0 ? 1 : 0);
 }
