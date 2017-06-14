@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+#include <stdio.h>
 
 char			**fgetc_stdin(void)
 {
@@ -33,31 +34,24 @@ char			**fgetc_stdin(void)
 	return (file);
 }
 
-void 			print_antfarm(t_lem_in *o)
+void 			clear_memory(char ***file, t_lem_in **prog)
 {
-    int 		i;
+    //int         i = -1;
 
-    i = -1;
-    printf("%d\n", o->n_ants);
-    while ((o->rooms)[++i])
+    t_lem_in    *o;
+    o = NULL;
+    if (file != NULL && *file != NULL)
+        free_strings(file);
+    if (prog != NULL && *prog != NULL)
     {
-        if (i == o->source)
-            printf("##start\n");
-        else if (i == o->dest)
-            printf("##end\n");
-        printf("%s\n", o->rooms[i]);
+        o = *prog;
+        free(o->start);
+        free(o->end);
+        free_ants(&(o->ants), o->n_ants);
+        free_int_2Darr(&(o->links), o->nlinks);
+        destroy_graph(&(o->ant_farm));
+        free(*prog);
     }
-    i = -1;
-    while (++i < o->nlinks)
-        printf("%s-%s\n", o->rooms[o->links[i][0]], o->rooms[o->links[i][1]]);
-    printf("\n");
-}
-
-void 			clear_memory(char ***file, t_lem_in **program)
-{
-    MEM_GUARD_VR((file));
-    MEM_GUARD_VR((program));
-    free_strings(file);
 }
 
 t_lem_in		*init_lem_in(char **file)
@@ -84,14 +78,18 @@ int				main(void)
     ERR_GUARD((print_error((errchk_input(file)))) == 1, EXIT_FAILURE);
     if ((program = init_lem_in(file)) == NULL)
     {
-        printf(RED"ERROR\n"CRESET);
+        ft_putstr(RED"ERROR\n"CRESET);
         clear_memory(&file, NULL);
         return (EXIT_FAILURE);
     }
-    print_antfarm(program);
-    init_ants(program);
-    route_ants(program);
-    printf(GREEN"-------------------------------------------------\n\n"CRESET);
+    if (test_path(program) != ERR)
+    {
+        print_antfarm(program);
+        init_ants(program);
+        route_ants(program);
+    }
+    else
+        print_error(12);
     clear_memory(&file, &program);
     return (EXIT_SUCCESS);
 }

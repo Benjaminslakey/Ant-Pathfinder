@@ -34,3 +34,16 @@ void 				init_ants(t_lem_in *prog)
 		ants[i] = create_ant(i, prog->source);
 	prog->ants = ants;
 }
+
+void                free_ants(t_ant ***ants, int num_ants)
+{
+    int             i;
+
+    i = -1;
+    MEM_GUARD_VR(ants);
+    MEM_GUARD_VR(*ants);
+    while (++i < num_ants)
+        free(((*ants)[i]));
+    free((*ants));
+    ants = NULL;
+}

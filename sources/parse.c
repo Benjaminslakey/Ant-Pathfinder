@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+#include <stdio.h>
 
 /*
 * fgetc_stdin: this function is only for use with lem_in
@@ -114,10 +115,13 @@ int             parse_ants(char **file, t_lem_in *prog)
     i = -1;
     while (file[++i])
     {
-        if (ft_strcspn(file[i], "0123456789"))
+        if (!chk_comm(file[i]))
+            ;
+        else if (ft_strcspn(file[i], "0123456789"))
+        {
             prog->n_ants = ft_atoi(file[i]);
-        else if (chk_comm(file[i]))
-            return (ERR);
+            return (SUCCESS);
+        }
     }
     return (SUCCESS);
 }
@@ -132,7 +136,7 @@ int 			parse_file(char **file, t_lem_in *prog)
     ERR_GUARD(parse_ants(file, prog) == ERR, ERR);
 	while (file[++i])
 		count += (!chk_roomformat(file[i])) ? 1 : 0;
-	prog->rooms = (char**)malloc(sizeof(char*) * count + 1);
+	prog->rooms = (char**)malloc(sizeof(char*) * (count + 1));
 	(prog->rooms)[count] = 0;
 	prog->nrooms = count;
 	i = -1;

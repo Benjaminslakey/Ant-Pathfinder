@@ -85,7 +85,7 @@ t_graph					*create_graph(int nv, char **vlist, int ne, int **e)
 	t_graph 			*graph;
 
 	v = -1;
-	MEM_GUARD((graph = (t_graph*)malloc(sizeof(t_graph*))));
+	MEM_GUARD((graph = (t_graph*)malloc(sizeof(t_graph))));
 	MEM_GUARD((vertices = (t_vert**)malloc(sizeof(t_vert*) * nv)));
 	while (vlist[++v])
 		vertices[v] = new_vertex(v, vlist[v], ne, e);

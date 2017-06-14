@@ -11,23 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-void 					array_reverse_int(int *arr, int size)
-{
-	int 				i;
-	int 				j;
-	int 				temp;
-
-	i = -1;
-	j = size;
-	while (++i < --j)
-	{
-		temp = arr[i];
-		arr[i] = arr[j];
-		arr[j] = temp;
-	}
-}
-
+#include <stdio.h>
 
 t_path 					*init_path(int capacity)
 {
@@ -38,6 +22,13 @@ t_path 					*init_path(int capacity)
 	path->len = 0;
 	path->maxlen = capacity;
 	return (path);
+}
+
+void                    free_path(t_path **path)
+{
+    free((*path)->arr);
+    free(*path);
+    path = NULL;
 }
 
 t_path 					*build_path(t_graph *graph, int src, int target)
@@ -60,4 +51,16 @@ t_path 					*build_path(t_graph *graph, int src, int target)
 	path->len = n + 1;
 	array_reverse_int(path->arr, path->len);
 	return (path);
+}
+
+int                     test_path(t_lem_in *o)
+{
+    int                 err;
+    t_path               *path;
+
+    err = SUCCESS;
+    path = dijkstras(o->ant_farm, o->source, o->dest);
+    if (o->ant_farm->vertices[o->dest]->prev == -1)
+       err = ERR;;
+    return (err);
 }

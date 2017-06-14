@@ -66,6 +66,7 @@ void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void                free_strings(char ***strings);
+void                free_int_2Darr(int ***arr, int height);
 size_t				ft_strlen(const char *s);
 char                *ft_str_replace(char **to_replace, char *replace_with);
 char				*ft_strdup(const char *s1);
@@ -143,7 +144,7 @@ void				copy_int_array(int **dest, int *src, int arr_size);
 void				integer_quicksort(int *int_table, int left, int right);
 void				swap_integers(int *a, int *b);
 int					ft_str_isnum(char *str);
-void				delete_strings(char ***strings, int num);
+void                array_reverse_int(int *arr, int size);
 int 				get_next_line(const int fd, char **line);
 
 #endif

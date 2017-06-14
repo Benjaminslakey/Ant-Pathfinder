@@ -15,7 +15,6 @@
 
 # include "libft.h"
 # include <limits.h>
-# include <stdio.h>
 
 # define PARENT(i) (i/2)
 # define LCHILD(i) (i * 2)
@@ -119,6 +118,7 @@ typedef struct			s_lem_in
 /* ************************************************************************** */
 
 t_graph					*create_graph(int nv, char **v, int ne, int **edges);
+void                    destroy_graph(t_graph **graph);
 t_vert 					*new_vertex(int nv, char *n, int ne, int **e);
 t_adjlist 				*create_adjlist(int v_ind, int ne, int **e);
 t_adj 					*new_adj(int vert_index, int adjacent_vert, int cost);
@@ -148,6 +148,7 @@ int 					errchk_input(char **file);
 int 					chk_comm(char *command);
 int 					chk_linkformat(char *link);
 int 					chk_roomformat(char *room);
+int                     test_path(t_lem_in *prog);
 
 /* ************************************************************************** */
 /** 						pathfinding										  */
@@ -161,7 +162,9 @@ void 					relax_all_edges(t_graph *graph, t_vert *u);
 void					find_paths(t_lem_in *prog);
 t_path					*init_path(int capacity);
 t_path 					*build_path(t_graph *graph, int src, int target);
+void                    free_path(t_path **path);
 void					init_ants(t_lem_in *prog);
+void                    free_ants(t_ant ***ants, int num_ants);
 void					route_ants(t_lem_in *prog);
 void 					determine_next_move(t_lem_in *prog, int ant_num);
 void					move_ant(t_lem_in *prog, t_ant *ant);
@@ -173,6 +176,7 @@ bool					goal_reached(t_lem_in *prog);
 * error printing, data to output conversion, print data
 */
 
+void                    print_antfarm(t_lem_in *o);
 int 					print_error(int err);
 void 					print_heap(t_heap *heap);
 void 					print_graph(t_graph *graph);
@@ -183,5 +187,5 @@ void 					print_moves(t_lem_in *prog, t_ant *ant);
 /* 							utility functions 								 */
 /* ************************************************************************* */
 
-void 				clear_memory(char ***file, t_lem_in **obj);
+void 		    		clear_memory(char ***file, t_lem_in **obj);
 #endif
