@@ -40,11 +40,12 @@ void 					print_path(t_path *path)
 	int 				i;
 
 	i = -1;
+	printf("path length: %d\n", path->len);
 	while (++i < path->len)
 	{
 		printf("%d", (path->arr)[i]);
 		if (i + 1 != path->len)
-			printf(GREEN"-->>"CRESET);
+			printf("-->>");
 	}
 }
 

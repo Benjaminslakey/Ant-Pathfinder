@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+#include <stdio.h>
 
 bool					goal_reached(t_lem_in *prog)
 {
@@ -49,8 +50,8 @@ void					determine_next_move(t_lem_in *prog, int ant_num)
 	}
 	else
 		ant->move_to = path->arr[1];
-	free_path(&path);
 	move_ant(prog, ant);
+	free_path(&path);
 }
 
 void					move_ant(t_lem_in *prog, t_ant *ant)

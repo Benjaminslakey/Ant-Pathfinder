@@ -53,6 +53,7 @@ t_adjlist		*create_adjlist(int v_ind, int ne, int **e)
 	c = -1;
 	v = 0;
 	head = (t_adjlist*)malloc(sizeof(t_adjlist));
+	head->first = NULL;
 	while (++c < ne)
 	{
 		if ((e[c][0] == v_ind || e[c][1] == v_ind))
@@ -76,6 +77,7 @@ t_vert			*new_vertex(int nv, char *n, int ne, int **e)
 	vert->dval = INFINITY;
 	vert->prev = -1;
 	vert->visited = false;
+	vert->occupied = false;
 	return (vert);
 }
 
