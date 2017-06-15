@@ -45,7 +45,8 @@ void			clear_memory(char ***file, t_lem_in **prog)
 	if (prog != NULL && *prog != NULL)
 	{
 		o = *prog;
-		free_ants(&(o->ants), o->n_ants);
+		if (o->ants != NULL)
+			free_ants(&(o->ants), o->n_ants);
 		if (o->links != NULL)
 			free_int_arrays(&(o->links), o->nlinks);
 		if (o->ant_farm != NULL)
@@ -66,6 +67,7 @@ t_lem_in		*init_lem_in(char **file)
 		free(o);
 		return (NULL);
 	}
+	o->ants = NULL;
 	o->ant_farm = create_graph(o->nrooms, o->rooms, o->nlinks, o->links);
 	return (o);
 }

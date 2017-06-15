@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+#include <stdio.h>
 
 t_ant				*create_ant(int id, int start)
 {
