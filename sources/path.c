@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-#include <stdio.h>
 
 t_path					*init_path(int capacity)
 {

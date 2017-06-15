@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-#include <stdio.h>
 
 int				parse_rooms(char **file, t_lem_in *prog)
 {

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-#include <stdio.h>
 
 char			**fgetc_stdin(void)
 {
@@ -48,7 +47,7 @@ void			clear_memory(char ***file, t_lem_in **prog)
 		o = *prog;
 		free_ants(&(o->ants), o->n_ants);
 		if (o->links != NULL)
-			free_int_2Darr(&(o->links), o->nlinks);
+			free_int_arrays(&(o->links), o->nlinks);
 		if (o->ant_farm != NULL)
 			destroy_graph(&(o->ant_farm));
 		if (o->rooms != NULL)

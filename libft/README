@@ -1,0 +1,3 @@
+My own implementation of some std c library functions according the the 42 norm and guidelines set out for this project.
+The repository currently contains mostly string and memory handling functions.
+I am working on integrating my ft_printf and get_next_line functions into the library, as well as some sorting algorithms.
