@@ -30,6 +30,7 @@ int				adjlst_add(t_adjlist *head, t_adj *new)
 
 	temp = NULL;
 	ERR_GUARD((head == NULL), ERR);
+	ERR_GUARD(new == NULL, ERR);
 	if (head->first == NULL)
 		head->first = new;
 	else

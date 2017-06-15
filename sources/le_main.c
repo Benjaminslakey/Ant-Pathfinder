@@ -47,8 +47,10 @@ void			clear_memory(char ***file, t_lem_in **prog)
 		free(o->start);
 		free(o->end);
 		free_ants(&(o->ants), o->n_ants);
-		free_int_2Darr(&(o->links), o->nlinks);
-		destroy_graph(&(o->ant_farm));
+		if (o->links != NULL)
+			free_int_2Darr(&(o->links), o->nlinks);
+		if (o->ant_farm != NULL)
+			destroy_graph(&(o->ant_farm));
 		free(*prog);
 	}
 }
