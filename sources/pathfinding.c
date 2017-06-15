@@ -12,13 +12,11 @@
 
 #include "../includes/lem_in.h"
 
-// unfinished
-
-void 					relax_edges(t_graph *g, t_heap *q, t_vert *u)
+void					relax_edges(t_graph *g, t_heap *q, t_vert *u)
 {
-	int 				dist;
-	t_adj 				*adj;
-	t_vert 				*temp;
+	int					dist;
+	t_adj				*adj;
+	t_vert				*temp;
 
 	dist = 0;
 	temp = NULL;

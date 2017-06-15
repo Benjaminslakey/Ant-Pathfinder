@@ -36,21 +36,23 @@ char			**fgetc_stdin(void)
 
 void			clear_memory(char ***file, t_lem_in **prog)
 {
+	int			i;
 	t_lem_in	*o;
 
+	i = -1;
 	o = NULL;
 	if (file != NULL && *file != NULL)
 		free_strings(file);
 	if (prog != NULL && *prog != NULL)
 	{
 		o = *prog;
-		free(o->start);
-		free(o->end);
 		free_ants(&(o->ants), o->n_ants);
 		if (o->links != NULL)
 			free_int_2Darr(&(o->links), o->nlinks);
 		if (o->ant_farm != NULL)
 			destroy_graph(&(o->ant_farm));
+		if (o->rooms != NULL)
+			free_strings(&(o->rooms));
 		free(*prog);
 	}
 }

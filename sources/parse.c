@@ -40,7 +40,6 @@ int				parse_rooms(char **file, t_lem_in *prog)
 int				parse_links(char **file, t_lem_in *o)
 {
 	int			i;
-	int			j;
 	int			c;
 	char		**temp;
 
@@ -51,23 +50,13 @@ int				parse_links(char **file, t_lem_in *o)
 	{
 		if (!chk_linkformat(file[i]))
 		{
-			j = -1;
 			ERR_GUARD(((temp = ft_strsplit(file[i], '-')) == NULL), ERR);
 			ERR_GUARD(((o->links)[++c] =
 						(int*)malloc(sizeof(int) * 2)) == NULL, ERR);
-			/*
 			if (str_inhaystack(temp[0], o->rooms) != ERR)
 				o->links[c][0] = str_inhaystack(temp[0], o->rooms);
 			if (str_inhaystack(temp[1], o->rooms) != ERR)
 				o->links[c][1] = str_inhaystack(temp[1], o->rooms);
-				*/
-			while ((o->rooms)[++j])
-			{
-				if (!ft_strcmp((o->rooms)[j], temp[0]))
-					(o->links)[c][0] = j;
-				if (!ft_strcmp((o->rooms)[j], temp[1]))
-					(o->links)[c][1] = j;
-			}
 			free_strings(&temp);
 		}
 	}
@@ -88,16 +77,16 @@ int				parse_commands(char **file, t_lem_in *prog)
 			temp = ft_strsplit(file[i + 1], ' ');
 			prog->source = str_inhaystack(temp[0], prog->rooms);
 			ERR_GUARD(prog->source == -1, ERR);
-			prog->start = (prog->rooms)[prog->source];
-			free(temp);
+			prog->start = prog->rooms[prog->source];
+			free_strings(&temp);
 		}
 		else if (!ft_strcmp(file[i], "##end"))
 		{
 			temp = ft_strsplit(file[i + 1], ' ');
 			prog->dest = str_inhaystack(temp[0], prog->rooms);
 			ERR_GUARD(prog->dest == -1, ERR);
-			prog->end = (prog->rooms)[prog->dest];
-			free(temp);
+			prog->end = prog->rooms[prog->dest];
+			free_strings(&temp);
 		}
 	}
 	return (SUCCESS);
@@ -132,7 +121,7 @@ int				parse_file(char **file, t_lem_in *prog)
 	while (file[++i])
 		count += (!chk_roomformat(file[i])) ? 1 : 0;
 	prog->rooms = (char**)malloc(sizeof(char*) * (count + 1));
-	(prog->rooms)[count] = 0;
+	prog->rooms[count] = 0;
 	prog->nrooms = count;
 	i = -1;
 	count = 0;
@@ -145,4 +134,3 @@ int				parse_file(char **file, t_lem_in *prog)
 	ERR_GUARD(parse_commands(file, prog) == ERR, ERR);
 	return (SUCCESS);
 }
-

@@ -62,5 +62,6 @@ int						test_path(t_lem_in *o)
 	path = dijkstras(o->ant_farm, o->source, o->dest);
 	if (o->ant_farm->vertices[o->dest]->prev == -1)
 		err = ERR;
+	free_path(&path);
 	return (err);
 }

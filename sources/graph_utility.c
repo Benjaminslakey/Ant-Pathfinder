@@ -35,12 +35,10 @@ void			free_adjlist(t_adjlist **list)
 	curr = (*list)->first;
 	while (curr != NULL)
 	{
-		if (prev != NULL)
-			free(prev);
 		prev = curr;
 		curr = curr->next;
+		free(prev);
 	}
-	free(curr);
 	free(*list);
 	list = NULL;
 }
@@ -56,8 +54,9 @@ void			destroy_graph(t_graph **graph)
 		temp = (*graph)->vertices[i];
 		free(temp->vname);
 		free_adjlist(&(temp->lst));
-		free((*graph)->vertices[i]);
+		free(temp);
 	}
+	free((*graph)->vertices);
 	free(*graph);
 	graph = NULL;
 }

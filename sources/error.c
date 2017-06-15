@@ -31,11 +31,15 @@ int			chk_linkformat(char *link)
 	temp = ft_strsplit(link, '-');
 	while (temp[++i])
 		;
-	ERR_GUARD((i != 2), ERR);
-	if (!ft_strcmp(temp[0], "L") || !ft_strcmp(temp[0], "#") ||
-		!ft_strcmp(temp[1], "L") || !ft_strcmp(temp[1], "#"))
-		errnum = ERR;
-	else if (chr_count(link, ' ') > 0)
+	if (i == 2)
+	{
+		if (!ft_strcmp(temp[0], "L") || !ft_strcmp(temp[0], "#") ||
+			!ft_strcmp(temp[1], "L") || !ft_strcmp(temp[1], "#"))
+			errnum = ERR;
+		else if (chr_count(link, ' ') > 0)
+			errnum = ERR;
+	}
+	else
 		errnum = ERR;
 	free_strings(&temp);
 	return (errnum);
@@ -47,21 +51,24 @@ int			chk_roomformat(char *room)
 	int		errnum;
 	char	**s;
 
-	s = NULL;
 	errnum = SUCCESS;
 	i = -1;
 	s = ft_strsplit(room, ' ');
 	while (s[++i])
 		;
-	ERR_GUARD((i != 3), -1);
-	if (chr_count(room, ' ') > 2)
-		errnum = ERR;
-	if (chr_count(s[0], '-') > 0)
-		errnum = ERR;
-	else if (!ft_strcspn(s[1], "-0123456789") ||
-		!ft_strcspn(s[2], "-0123456789"))
-		errnum = ERR;
-	else if (!ft_strncmp(s[0], "L", 1) || !ft_strncmp(s[0], "#", 1))
+	if (i == 3)
+	{
+		if (chr_count(room, ' ') > 2)
+			errnum = ERR;
+		if (chr_count(s[0], '-') > 0)
+			errnum = ERR;
+		else if (!ft_strcspn(s[1], "-0123456789") ||
+			!ft_strcspn(s[2], "-0123456789"))
+			errnum = ERR;
+		else if (!ft_strncmp(s[0], "L", 1) || !ft_strncmp(s[0], "#", 1))
+			errnum = ERR;
+	}
+	else
 		errnum = ERR;
 	free_strings(&s);
 	return (errnum);
